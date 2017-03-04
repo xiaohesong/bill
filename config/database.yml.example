@@ -9,4 +9,4 @@ development:
   <<: *default
   database: react_bill_dev
   username: postgres
-  password: oss
+  password: pwd
