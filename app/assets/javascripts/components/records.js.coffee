@@ -9,7 +9,7 @@
       React.DOM.h2
         className: 'title'
         'Records'
-      React.createElement RecordForm, handleNewRecord: @addRecordToList
+      React.createElement RecordForm, handleNewRecordToList: @addRecordToList
       React.DOM.hr null
       React.DOM.table
         className: 'table table-bordered'

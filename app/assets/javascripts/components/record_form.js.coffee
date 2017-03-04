@@ -6,7 +6,7 @@
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '', { record: @state }, (data) =>
-      @props.handleNewRecord data
+      @props.handleNewRecordToList data
       @setState @getInitialState()
     , 'JSON'
   render: ->
