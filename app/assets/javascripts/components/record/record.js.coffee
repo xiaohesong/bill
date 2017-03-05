@@ -58,9 +58,24 @@
       React.DOM.td null,
         React.DOM.a
           className: 'btn btn-default'
-          onClick: @handleEdit
+          onClick: @handleUpdate
           'Update'
         React.DOM.a
           className: 'btn btn-danger'
           onClick: @handleToggle
           'Cancel'
+
+  handleUpdate: (e)->
+    e.preventDefault()
+    data =
+      title: this.refs.title.value
+      date: this.refs.date.value
+      amount: this.refs.amount.value
+    $.ajax
+      method: 'put'
+      url: "/records/#{@props.record.id}"
+      data:
+        record: data
+      success: (data)=>
+        @setState edit: false
+        @props.handleEditRecord @props.record, data
