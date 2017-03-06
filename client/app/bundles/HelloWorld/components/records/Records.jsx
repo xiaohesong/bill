@@ -10,13 +10,13 @@ export default class Records extends React.Component {
     this.state = {
       records: this.props.records
     }
-    this.createFinished = this.createFinished.bind(this)
-    this.handleDeleted = this.handleDeleted.bind(this)
-    this.handleUpdated = this.handleUpdated.bind(this)
+    // this.createFinished = this.createFinished.bind(this)
+    // this.handleDeleted = this.handleDeleted.bind(this)
+    // this.handleUpdated = this.handleUpdated.bind(this)
   }
 
 
-  createFinished(data){
+  createFinished = (data) => {
     let records = this.state.records
     records.push(data)
     this.setState({
@@ -44,7 +44,7 @@ export default class Records extends React.Component {
     return this.creditAmount() + this.debitAmount()
   }
 
-  handleDeleted(deleteRecord){
+  handleDeleted = (deleteRecord) =>{
     let records = this.state.records
     let index = records.indexOf(deleteRecord)
     records.splice(index, 1)
@@ -53,7 +53,7 @@ export default class Records extends React.Component {
     })
   }
 
-  handleUpdated(record, result){
+  handleUpdated= (record, result) => {
     let records = this.state.records
     let index = records.indexOf(record)
     records.splice(index,1,result)

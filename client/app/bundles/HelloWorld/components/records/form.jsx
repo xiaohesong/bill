@@ -7,18 +7,18 @@ export default class Form extends React.Component{
       title: '',
       amount: ''
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
+  handleChange = (e) =>{
     let name = e.target.name
     this.setState({
       [name]: e.target.value
     })
   }
 
-  handleSubmit(e){
+  handleSubmit = (e) =>{
     e.preventDefault();
     var _this = this
     $.ajax({

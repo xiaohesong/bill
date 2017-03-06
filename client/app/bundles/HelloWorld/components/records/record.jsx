@@ -5,12 +5,12 @@ export default class Record extends React.Component{
     this.state = {
       edit: false
     }
-    this.handleClickDelete = this.handleClickDelete.bind(this)
-    this.handleClickSetToForm = this.handleClickSetToForm.bind(this)
-    this.handleToUpdate = this.handleToUpdate.bind(this)
+    // this.handleClickDelete = this.handleClickDelete.bind(this)
+    // this.handleClickSetToForm = this.handleClickSetToForm.bind(this)
+    // this.handleToUpdate = this.handleToUpdate.bind(this)
   }
 
-  handleClickDelete(e) {
+  handleClickDelete = (e) => {
     e.preventDefault();
     var _this = this
     $.ajax({
@@ -23,14 +23,14 @@ export default class Record extends React.Component{
     })
   }
 
-  handleClickSetToForm(e){
+  handleClickSetToForm = (e) => {
     e.preventDefault();
     this.setState({
       edit: !this.state.edit
     })
   }
 
-  handleToUpdate(e) {
+  handleToUpdate = (e) => {
     e.preventDefault();
     var _this = this
     let record = {
