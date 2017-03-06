@@ -12,6 +12,7 @@ export default class Records extends React.Component {
     }
     this.createFinished = this.createFinished.bind(this)
     this.handleDeleted = this.handleDeleted.bind(this)
+    this.handleUpdated = this.handleUpdated.bind(this)
   }
 
 
@@ -52,6 +53,15 @@ export default class Records extends React.Component {
     })
   }
 
+  handleUpdated(record, result){
+    let records = this.state.records
+    let index = records.indexOf(record)
+    records.splice(index,1,result)
+    this.setState({
+      records: records
+    })
+  }
+
   render() {
     return(
       <div className='records'>
@@ -76,7 +86,8 @@ export default class Records extends React.Component {
             {
               this.state.records.map((record,i)=>{
                 return(
-                  <Record record={record} key={record.id} handleDeleted={this.handleDeleted}/>
+                  <Record record={record} key={record.id} handleDeleted={this.handleDeleted}
+                          handleUpdated={this.handleUpdated} />
                 )
               })
             }
