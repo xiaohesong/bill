@@ -11,15 +11,42 @@ export default class Records extends React.Component {
       records: this.props.records
     }
     this.createFinished = this.createFinished.bind(this)
+    this.handleDeleted = this.handleDeleted.bind(this)
   }
 
-  onRadChange = () => {
-  };
 
   createFinished(data){
-    console.log(this.records)
     let records = this.state.records
     records.push(data)
+    this.setState({
+      records: records
+    })
+  }
+
+  creditAmount() {
+    let records = this.state.records
+    let credits = records.filter(record => record.amount >= 0)
+    return credits.reduce(function(add,item){
+      return add + item.amount
+    },0)
+  }
+
+  debitAmount() {
+    let records = this.state.records
+    let debits = records.filter(record => record.amount < 0)
+    return debits.reduce(function(add,item){
+      return add + item.amount
+    },0)
+  }
+
+  balanceAmount() {
+    return this.creditAmount() + this.debitAmount()
+  }
+
+  handleDeleted(deleteRecord){
+    let records = this.state.records
+    let index = records.indexOf(deleteRecord)
+    records.splice(index, 1)
     this.setState({
       records: records
     })
@@ -30,9 +57,9 @@ export default class Records extends React.Component {
       <div className='records'>
         <h2 className='title'>Records</h2>
         <div className='row'>
-          <Amount type='success' amount='112' text='Credit'/>
-          <Amount type='danger' amount='112' text='Debit'/>
-          <Amount type='info' amount='112' text='Blance'/>
+          <Amount type='success' amount={this.creditAmount()} text='Credit'/>
+          <Amount type='danger' amount={this.debitAmount()} text='Debit'/>
+          <Amount type='info' amount={this.balanceAmount()} text='Blance'/>
         </div>
         <Form createFinished={this.createFinished}/>
         <hr/>
@@ -49,7 +76,7 @@ export default class Records extends React.Component {
             {
               this.state.records.map((record,i)=>{
                 return(
-                  <Record record={record} key={record.id} />
+                  <Record record={record} key={record.id} handleDeleted={this.handleDeleted}/>
                 )
               })
             }
