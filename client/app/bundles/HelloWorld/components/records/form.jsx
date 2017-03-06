@@ -8,7 +8,7 @@ export default class Form extends React.Component{
       amount: ''
     }
     this.handleChange = this.handleChange.bind(this);
-    this.valid = this.valid.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -20,14 +20,23 @@ export default class Form extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
+    var _this = this
     $.ajax({
       url: '/records',
       method: 'post',
-      success: function(date){
-        
+      data: {record: this.state},
+      success: function(data){
+        _this.setState({
+          title: '',
+          amount:'',
+          date: ''
+        })
+        _this.props.createFinished(data)
       }
     })
   }
+
+
 
   valid() {
     return this.state.title != "" && this.state.date != "" && this.state.amount != ""

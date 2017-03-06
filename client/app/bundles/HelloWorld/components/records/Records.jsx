@@ -7,11 +7,23 @@ import Record from './record'
 export default class Records extends React.Component {
   constructor(props) {
     super(props);
-    this.records = this.props.records
+    this.state = {
+      records: this.props.records
+    }
+    this.createFinished = this.createFinished.bind(this)
   }
 
   onRadChange = () => {
   };
+
+  createFinished(data){
+    console.log(this.records)
+    let records = this.state.records
+    records.push(data)
+    this.setState({
+      records: records
+    })
+  }
 
   render() {
     return(
@@ -22,7 +34,7 @@ export default class Records extends React.Component {
           <Amount type='danger' amount='112' text='Debit'/>
           <Amount type='info' amount='112' text='Blance'/>
         </div>
-        <Form />
+        <Form createFinished={this.createFinished}/>
         <hr/>
         <table className='table table-bordered'>
           <thead>
@@ -35,7 +47,7 @@ export default class Records extends React.Component {
           </thead>
           <tbody>
             {
-              this.records.map((record,i)=>{
+              this.state.records.map((record,i)=>{
                 return(
                   <Record record={record} key={record.id} />
                 )
