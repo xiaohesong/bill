@@ -1,0 +1,15 @@
+defaults: &defaults
+  host: ENV["REDIS_URL"]
+  port: 6379
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -1,12 +1,27 @@
+# default: &default
+#   adapter: postgresql
+#   encoding: utf8
+#   pool: 50
+#   timeout: 5000
+#   host: localhost
+#
+# development:
+#   <<: *default
+#   database: react_bill_dev
+#   username: postgres
+#   password: oss
+
+
 default: &default
   adapter: postgresql
-  encoding: utf8
-  pool: 50
+  encoding: unicode
+  pool: 5
   timeout: 5000
-  host: localhost
 
-development:
+production:
   <<: *default
-  database: react_bill_dev
-  username: postgres
-  password: oss
+  pool: 10
+  database: <%= ENV["DATABASE"] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  username: <%= ENV["DATAUSER"] %>
+  password: <%= ENV["DATAPASSWD"] %>
