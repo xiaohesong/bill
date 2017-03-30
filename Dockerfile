@@ -16,7 +16,7 @@ RUN bundle install
 
 COPY . $APP_HOME
 
-RUN bundle exec rake assets:precompile RAILS_ENV=production
+RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 EXPOSE 8080
 CMD ["bundle", "exec", "puma", "-C", "config/puma_docker.rb"]
